@@ -6,4 +6,5 @@
     android:canRetrieveWindowContent="true"
     android:description="@string/auto_install_accessibility_description"
     android:notificationTimeout="100"
+    android:canPerformGestures="true"
     android:packageNames="com.android.packageinstaller" />

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AccessibilityServiceDemo</string>
+    <string name="app_name">AA杨华</string>
     <string name="accessibility_description">auto reply for wei chat</string>
     <string name="my_accessibility_description">test Accessibility services</string>
     <string name="auto_install_accessibility_description">魅族手机自动安装服务</string>
