@@ -21,6 +21,20 @@ import solid.ren.accessibilityservicedemo.PrintUtils;
  */
 public class MyAccessibilityService extends AccessibilityService {
     private final String qutoutiao = "com.jifen.qukan";
+    private final String shuabao = "com.jm.video";
+    private final String huoshan = "com.ss.android.ugc.livelite";
+    private final String shandian = "c.l.a";
+    private final String tishi = "com.android.systemui";
+    //快看点
+    private final String kuaikandian = "com.yuncheapp.android.pearl";
+    //抖音极速版
+    private final String douyin = "com.ss.android.ugc.aweme.lite";
+    //米读极速版
+    private final String midu = "com.lechuan.mdwz";
+    //疯读小说
+    private final String fengdu = "com.cootek.crazyreader";
+    //快手极速版
+    private final String kuaishou = "com.kuaishou.nebula";
 
 
     private Handler mHandler;
@@ -39,19 +53,16 @@ public class MyAccessibilityService extends AccessibilityService {
     }
 
 
-
-
-
     @RequiresApi(api = Build.VERSION_CODES.N)
-    private  void  cc(){
+    private void cc() {
 
         //AccessibilityService.GLOBAL_ACTION_BACK
         //GLOBAL_ACTION_HOME
         //GLOBAL_ACTION_NOTIFICATIONS
         //GLOBAL_ACTION_RECENTS
-        if(isInMESSAGE == false){
+        if (isInMESSAGE == false) {
 
-            mHandler.sendEmptyMessageDelayed(11,MainActivity.time*1000);
+            mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
             isInMESSAGE = true;
         }
 
@@ -78,14 +89,35 @@ public class MyAccessibilityService extends AccessibilityService {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 //                performGlobalAction(AccessibilityService.GESTURE_SWIPE_LEFT);
-                if (!PrintUtils.currentPn.equals(qutoutiao)) {
+                if (
+                        !(
+                                PrintUtils.currentPn.equals(qutoutiao)
+                                        || PrintUtils.currentPn.equals(shuabao)
+                                        || PrintUtils.currentPn.equals(huoshan) || PrintUtils.currentPn.equals(shandian)
+                                        || PrintUtils.currentPn.equals(tishi)
+                                        || PrintUtils.currentPn.equals(kuaikandian)
+                                        || PrintUtils.currentPn.equals(douyin)
+                                        || PrintUtils.currentPn.equals(midu)
+                                        || PrintUtils.currentPn.equals(fengdu)
+                                        || PrintUtils.currentPn.equals(kuaishou)
+                        )
+                ) {
                     mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
                     return;
                 }
 
                 Path path = new Path();
-                path.moveTo(300, 1000);
-                path.lineTo(300, 600);
+                //竖着滑动
+                if (MainActivity.RadioGroupId == 0) {
+                    Log.d("yanghua", "现在上滑动 = ");
+                    path.moveTo(300, 1000);
+                    path.lineTo(300, 600);
+                } else {
+                    Log.d("yanghua", "现在左右滑动 = ");
+                    path.moveTo(800, 120);
+                    path.lineTo(200, 120);
+                }
+
 //先横滑
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                     final GestureDescription.StrokeDescription sd = new GestureDescription.StrokeDescription(path, 1, 1);
@@ -104,6 +136,29 @@ public class MyAccessibilityService extends AccessibilityService {
                     }, new Handler());
                     Log.d("yanghua", "isGestureDispath = " + isGestureDispath);
                 }
+
+//横着滑动
+//                Path path1 = new Path();
+//
+////先横滑
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//                    final GestureDescription.StrokeDescription sd1 = new GestureDescription.StrokeDescription(path1, 1, 1);
+//                    boolean isGestureDispath = dispatchGesture(new GestureDescription.Builder().addStroke(sd1).build(), new GestureResultCallback() {
+//                        @Override
+//                        public void onCompleted(GestureDescription gestureDescription) {
+//                            super.onCompleted(gestureDescription);
+//                            Log.d("yanghua", "滑动结束 = ");
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(GestureDescription gestureDescription) {
+//                            super.onCancelled(gestureDescription);
+//                            Log.d("yanghua", "滑动取消 = ");
+//                        }
+//                    }, new Handler());
+//                    Log.d("yanghua", "isGestureDispath = " + isGestureDispath);
+//                }
+
                 mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
 
 //                isInMESSAGE =false;

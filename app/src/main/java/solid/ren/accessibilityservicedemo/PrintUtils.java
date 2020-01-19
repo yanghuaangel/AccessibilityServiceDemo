@@ -28,7 +28,7 @@ public class PrintUtils {
                 break;
             case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED://窗体状态改变
                 log("event type:TYPE_WINDOW_STATE_CHANGED");
-                log("yanghuya"+ "packageName:" + event.getPackageName() + "");
+                log("yanghua === "+ "packageName:" + event.getPackageName() + "");
                 currentPn = event.getPackageName().toString();
 
                 break;
