@@ -35,6 +35,8 @@ public class MyAccessibilityService extends AccessibilityService {
     private final String fengdu = "com.cootek.crazyreader";
     //快手极速版
     private final String kuaishou = "com.kuaishou.nebula";
+    //抖音短视频
+    private final String douying = "com.ss.android.ugc.aweme";
 
 
     private Handler mHandler;
@@ -100,6 +102,7 @@ public class MyAccessibilityService extends AccessibilityService {
                                         || PrintUtils.currentPn.equals(midu)
                                         || PrintUtils.currentPn.equals(fengdu)
                                         || PrintUtils.currentPn.equals(kuaishou)
+                                        || PrintUtils.currentPn.equals((douying))
                         )
                 ) {
                     mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
