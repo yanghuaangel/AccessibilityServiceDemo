@@ -67,6 +67,8 @@ public class MyAccessibilityService extends AccessibilityService {
 
 //    private boolean isdebug = true;
 
+    private final int img_close_flag = 23;
+
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
@@ -95,28 +97,10 @@ public class MyAccessibilityService extends AccessibilityService {
                 }
 
 
-//                List<AccessibilityNodeInfo> listxk  = event.getSource().findAccessibilityNodeInfosByText("看视频辛苦");
-//                if(listxk == null || listxk.size() == 0 ){
-////                    Log.d("yanghua", "没有找到广告 关闭广告");
-//                }else {
-//                    Log.d("yanghua", "找到 看视频辛苦");
-////                    listxk.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-//                    removeMessage(100);
-//                    mHandler.sendEmptyMessageDelayed(100,3_000);
-//
-//
-//                }
 
                 if (!isMoneyApp()) {
                     return;
                 }
-//                List<AccessibilityNodeInfo> list0  = event.getSource().findAccessibilityNodeInfosByText("0");
-//                if(list0 == null || list0.size() == 0 ){
-////                    Log.d("yanghua", "没有找到视频奖励按钮");
-//                }else {
-//                    Log.d("yanghua", "找到了倒计时0");
-//                    list0.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-//                }
 
                 List<AccessibilityNodeInfo> list = event.getSource().findAccessibilityNodeInfosByText("看视频奖励最高翻");
                 if (list == null || list.size() == 0) {
@@ -124,6 +108,20 @@ public class MyAccessibilityService extends AccessibilityService {
                 } else {
                     Log.d("yanghua", "找到了视频奖励按钮");
                     list.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    mHandler.sendEmptyMessageDelayed(100, 38_000);
+
+
+                    mHandler.removeMessages(11);
+                    mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
+                    lastscrolltime = System.currentTimeMillis();
+                }
+
+                List<AccessibilityNodeInfo> list22= event.getSource().findAccessibilityNodeInfosByText("看一段视频即可");
+                if (list22 == null || list22.size() == 0) {
+//                    Log.d("yanghua", "没有找到视频奖励按钮");
+                } else {
+                    Log.d("yanghua", "找到了视频奖励按钮");
+                    list22.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                     mHandler.sendEmptyMessageDelayed(100, 38_000);
 
 
@@ -148,19 +146,16 @@ public class MyAccessibilityService extends AccessibilityService {
                 if (listxch == null || listxch.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    Log.d("yanghua", "找到了广告X");
+                    Log.d("yanghua", "找到了广告 前X");
 //                    mHandler.removeMessages(100);
-                    listxch.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+
+                    if(!mHandler.hasMessages(11)){
+                        listxch.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    }
+
 
                 }
 
-//                List<AccessibilityNodeInfo> listyzm  = event.getSource().findAccessibilityNodeInfosByText("已转满");
-//                if(listyzm == null || listyzm.size() == 0 ){
-////                    Log.d("yanghua", "没有找到视频奖励按钮");
-//                }else {
-//                    Log.d("yanghua", "找到了XX");
-//                    mHandler.removeMessages(100);
-//                }
 
                 List<AccessibilityNodeInfo> listyy = event.getSource().findAccessibilityNodeInfosByViewId("com.video.yy:id/tt_video_ad_close_layout");
                 if (listyy == null || listyy.size() == 0) {
@@ -177,8 +172,11 @@ public class MyAccessibilityService extends AccessibilityService {
                 if (listyyimg == null || listyyimg.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    Log.d("yanghua", "找到了广告X");
-                    listyyimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    Log.d("yanghua", "找到了广告 前X");
+                    if(!mHandler.hasMessages(11)){
+
+                        listyyimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    }
 //                    mHandler.removeMessages(100);
                 }
 
@@ -197,8 +195,11 @@ public class MyAccessibilityService extends AccessibilityService {
                 if (listkdimg == null || listkdimg.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    Log.d("yanghua", "找到了广告X");
-                    listkdimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    Log.d("yanghua", "找到了广告 前X");
+                    if(!mHandler.hasMessages(11)){
+
+                        listkdimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    }
 //                    mHandler.removeMessages(100);
                 }
 
@@ -217,8 +218,11 @@ public class MyAccessibilityService extends AccessibilityService {
                 if (listgsimg == null || listgsimg.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    Log.d("yanghua", "找到了广告X");
-                    listgsimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    Log.d("yanghua", "找到了广告 前X");
+                    if(!mHandler.hasMessages(11)){
+
+                        listgsimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    }
 //                    mHandler.removeMessages(100);
                 }
 
@@ -309,11 +313,9 @@ public class MyAccessibilityService extends AccessibilityService {
 //                    sendEmptyMessageDelayed(100,1500);
 //                    performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
 
+                }else if(msg.what == img_close_flag){
+
                 }
-//                }else if(msg.what == 101){
-//                    Log.d("yanghua", "101  ================================= ");
-//                    mHandler.sendEmptyMessageDelayed(101,2000);
-//                }
 
             }
         };
