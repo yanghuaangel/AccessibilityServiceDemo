@@ -29,7 +29,11 @@ public class PrintUtils {
             case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED://窗体状态改变
                 log("event type:TYPE_WINDOW_STATE_CHANGED");
                 log("yanghua === "+ "packageName:" + event.getPackageName() + "");
-                currentPn = event.getPackageName().toString();
+                try{
+                    currentPn = event.getPackageName().toString();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
                 break;
             case AccessibilityEvent.TYPE_VIEW_ACCESSIBILITY_FOCUSED://View获取到焦点
@@ -60,6 +64,7 @@ public class PrintUtils {
 
         for (CharSequence txt : event.getText()) {
             log("text:" + txt);
+
         }
 
         log("-------------------------------------------------------------");

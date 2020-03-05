@@ -1,9 +1,11 @@
 package solid.ren.accessibilityservicedemo;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        Log.d("yanghua","机器型号 :" + Build.MODEL);
         findViewById(R.id.btn_open_service).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
