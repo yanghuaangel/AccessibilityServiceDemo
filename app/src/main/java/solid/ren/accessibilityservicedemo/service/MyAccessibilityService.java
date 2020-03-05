@@ -68,6 +68,8 @@ public class MyAccessibilityService extends AccessibilityService {
 //    private boolean isdebug = true;
 
     private final int img_close_flag = 23;
+    private final int scroll_flag = 11;
+    private final int click_x = 100;
 
 
     @Override
@@ -86,8 +88,8 @@ public class MyAccessibilityService extends AccessibilityService {
                     if (txt.toString().contains("看视频辛苦")) {
                         Log.d("yanghua", "找到 看视频辛苦");
 //                    listxk.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        removeMessage(100);
-                        mHandler.sendEmptyMessageDelayed(100, 3_000);
+                        removeMessage(click_x);
+                        mHandler.sendEmptyMessageDelayed(click_x, 3_000);
                     }
 
                 }
@@ -97,51 +99,67 @@ public class MyAccessibilityService extends AccessibilityService {
                 }
 
 
-
                 if (!isMoneyApp()) {
                     return;
                 }
 
-                List<AccessibilityNodeInfo> list = event.getSource().findAccessibilityNodeInfosByText("看视频奖励最高翻");
+                final List<AccessibilityNodeInfo> list = event.getSource().findAccessibilityNodeInfosByText("看视频奖励最高翻");
                 if (list == null || list.size() == 0) {
 //                    Log.d("yanghua", "没有找到视频奖励按钮");
                 } else {
                     Log.d("yanghua", "找到了视频奖励按钮");
-                    list.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                    mHandler.sendEmptyMessageDelayed(100, 38_000);
+                    mHandler.sendEmptyMessageDelayed(click_x, 38_000);
 
-
-                    mHandler.removeMessages(11);
-                    mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
+                    mHandler.removeMessages(scroll_flag);
+                    mHandler.sendEmptyMessageDelayed(scroll_flag, MainActivity.time * 1000);
                     lastscrolltime = System.currentTimeMillis();
+
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            list.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                        }
+                    }, 1000);
+
                 }
 
-                List<AccessibilityNodeInfo> list22= event.getSource().findAccessibilityNodeInfosByText("看一段视频即可");
+                final List<AccessibilityNodeInfo> list22 = event.getSource().findAccessibilityNodeInfosByText("看一段视频即可");
                 if (list22 == null || list22.size() == 0) {
 //                    Log.d("yanghua", "没有找到视频奖励按钮");
                 } else {
                     Log.d("yanghua", "找到了视频奖励按钮");
-                    list22.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                    mHandler.sendEmptyMessageDelayed(100, 38_000);
+                    mHandler.sendEmptyMessageDelayed(click_x, 38_000);
 
-
-                    mHandler.removeMessages(11);
-                    mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
+                    mHandler.removeMessages(scroll_flag);
+                    mHandler.sendEmptyMessageDelayed(scroll_flag, MainActivity.time * 1000);
                     lastscrolltime = System.currentTimeMillis();
+
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            list22.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                        }
+                    }, 1000);
                 }
 
-                List<AccessibilityNodeInfo> list1 = event.getSource().findAccessibilityNodeInfosByViewId("com.video.xch:id/tt_video_ad_close_layout");
+                final List<AccessibilityNodeInfo> list1 = event.getSource().findAccessibilityNodeInfosByViewId("com.video.xch:id/tt_video_ad_close_layout");
                 if (list1 == null || list1.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    if (!Build.MODEL.contains("Redmi") ) {
+                    if (!Build.MODEL.contains("Redmi")) {
                         Log.d("yanghua", "找到了广告X");
-                        list1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        removeMessage(100);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                list1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            }
+                        }, 1000);
+
+                        removeMessage(click_x);
                     }
 
-
                 }
+
                 List<AccessibilityNodeInfo> listxch = event.getSource().findAccessibilityNodeInfosByViewId("com.video.xch:id/img_close");
                 if (listxch == null || listxch.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
@@ -149,7 +167,7 @@ public class MyAccessibilityService extends AccessibilityService {
                     Log.d("yanghua", "找到了广告 前X");
 //                    mHandler.removeMessages(100);
 
-                    if(!mHandler.hasMessages(11)){
+                    if (!mHandler.hasMessages(click_x)) {
                         listxch.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                     }
 
@@ -157,14 +175,19 @@ public class MyAccessibilityService extends AccessibilityService {
                 }
 
 
-                List<AccessibilityNodeInfo> listyy = event.getSource().findAccessibilityNodeInfosByViewId("com.video.yy:id/tt_video_ad_close_layout");
+                final List<AccessibilityNodeInfo> listyy = event.getSource().findAccessibilityNodeInfosByViewId("com.video.yy:id/tt_video_ad_close_layout");
                 if (listyy == null || listyy.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    if (!Build.MODEL.contains("Redmi") ) {
+                    if (!Build.MODEL.contains("Redmi")) {
                         Log.d("yanghua", "找到了广告X");
-                        listyy.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        removeMessage(100);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                listyy.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            }
+                        }, 1000);
+                        removeMessage(click_x);
                     }
                 }
 
@@ -173,21 +196,26 @@ public class MyAccessibilityService extends AccessibilityService {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
                     Log.d("yanghua", "找到了广告 前X");
-                    if(!mHandler.hasMessages(11)){
+                    if (!mHandler.hasMessages(click_x)) {
 
                         listyyimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                     }
 //                    mHandler.removeMessages(100);
                 }
 
-                List<AccessibilityNodeInfo> listkd = event.getSource().findAccessibilityNodeInfosByViewId("com.video.kd:id/tt_video_ad_close_layout");
+                final List<AccessibilityNodeInfo> listkd = event.getSource().findAccessibilityNodeInfosByViewId("com.video.kd:id/tt_video_ad_close_layout");
                 if (listkd == null || listkd.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    if (!Build.MODEL.contains("Redmi") ) {
+                    if (!Build.MODEL.contains("Redmi")) {
                         Log.d("yanghua", "找到了广告X");
-                        listkd.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        removeMessage(100);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                listkd.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            }
+                        }, 1000);
+                        removeMessage(click_x);
                     }
                 }
 
@@ -196,21 +224,26 @@ public class MyAccessibilityService extends AccessibilityService {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
                     Log.d("yanghua", "找到了广告 前X");
-                    if(!mHandler.hasMessages(11)){
+                    if (!mHandler.hasMessages(click_x)) {
 
                         listkdimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                     }
 //                    mHandler.removeMessages(100);
                 }
 
-                List<AccessibilityNodeInfo> listgs = event.getSource().findAccessibilityNodeInfosByViewId("com.video.gs:id/tt_video_ad_close_layout");
+                final List<AccessibilityNodeInfo> listgs = event.getSource().findAccessibilityNodeInfosByViewId("com.video.gs:id/tt_video_ad_close_layout");
                 if (listgs == null || listgs.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    if (!Build.MODEL.contains("Redmi") ) {
+                    if (!Build.MODEL.contains("Redmi")) {
                         Log.d("yanghua", "找到了广告X");
-                        listgs.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        removeMessage(100);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                listgs.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            }
+                        }, 1000);
+                        removeMessage(click_x);
                     }
                 }
 
@@ -219,21 +252,26 @@ public class MyAccessibilityService extends AccessibilityService {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
                     Log.d("yanghua", "找到了广告 前X");
-                    if(!mHandler.hasMessages(11)){
+                    if (!mHandler.hasMessages(click_x)) {
 
                         listgsimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                     }
 //                    mHandler.removeMessages(100);
                 }
 
-                List<AccessibilityNodeInfo> list2 = event.getSource().findAccessibilityNodeInfosByText("关闭广告");
+                final List<AccessibilityNodeInfo> list2 = event.getSource().findAccessibilityNodeInfosByText("关闭广告");
                 if (list2 == null || list2.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告 关闭广告");
                 } else {
-                    if (!Build.MODEL.contains("Redmi") ) {
+                    if (!Build.MODEL.contains("Redmi")) {
                         Log.d("yanghua", "找到了广告 关闭广告");
-                        list2.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                        removeMessage(100);
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                list2.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            }
+                        }, 1000);
+                        removeMessage(click_x);
                     }
 
                 }
@@ -266,10 +304,10 @@ public class MyAccessibilityService extends AccessibilityService {
         //GLOBAL_ACTION_HOME
         //GLOBAL_ACTION_NOTIFICATIONS
         //GLOBAL_ACTION_RECENTS
-        if (!mHandler.hasMessages(11)) {
+        if (!mHandler.hasMessages(scroll_flag)) {
 
             Log.d("yanghua", "多少秒滑动一次 = " + MainActivity.time);
-            mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
+            mHandler.sendEmptyMessageDelayed(scroll_flag, MainActivity.time * 1000);
             isInMESSAGE = true;
         }
 
@@ -296,13 +334,13 @@ public class MyAccessibilityService extends AccessibilityService {
             public void handleMessage(Message msg) {
                 super.handleMessage(msg);
 //                performGlobalAction(AccessibilityService.GESTURE_SWIPE_LEFT);1`
-                if (msg.what == 11) {
+                if (msg.what == scroll_flag) {
                     if (System.currentTimeMillis() > lastscrolltime + MainActivity.time * 1000) {
                         doScroll();
                     }
-                } else if (msg.what == 100) {
+                } else if (msg.what == click_x) {
 //                    if (Build.MODEL.contains("Redmi") || Build.MODEL.contains("ONEPLUS")) {
-                    if(Build.MODEL.contains("Redmi")){
+                    if (Build.MODEL.contains("Redmi")) {
                         doClick();
                     }
 //                    if(recentCount > 1){
@@ -313,7 +351,7 @@ public class MyAccessibilityService extends AccessibilityService {
 //                    sendEmptyMessageDelayed(100,1500);
 //                    performGlobalAction(AccessibilityService.GLOBAL_ACTION_RECENTS);
 
-                }else if(msg.what == img_close_flag){
+                } else if (msg.what == img_close_flag) {
 
                 }
 
@@ -397,7 +435,7 @@ public class MyAccessibilityService extends AccessibilityService {
 
 
         if (!isMoneyApp()) {
-            mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
+            mHandler.sendEmptyMessageDelayed(scroll_flag, MainActivity.time * 1000);
             return;
         }
         Log.d("yanghua", "多少秒滑动一次 = " + MainActivity.time);
@@ -454,7 +492,7 @@ public class MyAccessibilityService extends AccessibilityService {
 //                    Log.d("yanghua", "isGestureDispath = " + isGestureDispath);
 //                }
 
-        mHandler.sendEmptyMessageDelayed(11, MainActivity.time * 1000);
+        mHandler.sendEmptyMessageDelayed(scroll_flag, MainActivity.time * 1000);
 
 //                isInMESSAGE =false;
     }
