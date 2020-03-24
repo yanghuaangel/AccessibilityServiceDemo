@@ -17,7 +17,7 @@ public class PrintUtils {
     public static void printEvent(AccessibilityEvent event) {
         log("-------------------------------------------------------------");
         int eventType = event.getEventType();
-        log("packageName:" + event.getPackageName() + "");
+        log("yh packageName:" + event.getPackageName() + "");
         log("source:" + event.getSource() + "");
         log("source class:" + event.getClassName() + "");
         log("event type(int):" + eventType + "");
