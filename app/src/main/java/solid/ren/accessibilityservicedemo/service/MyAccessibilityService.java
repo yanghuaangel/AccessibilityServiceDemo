@@ -147,7 +147,6 @@ public class MyAccessibilityService extends AccessibilityService {
                 if (listqls == null || listqls.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
                 } else {
-                    if (!Build.MODEL.contains("Redmi")) {
                         Log.d("yanghua", "找到了广告X");
                         isEnterAd = false;
                         mHandler.postDelayed(new Runnable() {
@@ -157,9 +156,6 @@ public class MyAccessibilityService extends AccessibilityService {
                                 isAd = false;
                             }
                         }, 1000);
-
-                        removeMessage(click_x);
-                    }
 
                 }
 
