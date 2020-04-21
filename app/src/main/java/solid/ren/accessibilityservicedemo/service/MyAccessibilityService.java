@@ -59,6 +59,8 @@ public class MyAccessibilityService extends AccessibilityService {
     private final String gs = "com.video.gs";
     //趣铃声
     private final String qls = "com.zheyun.bumblebee";
+    //音浪
+    private final String yl = "com.video.yl";
     //安装程序
     private final String install  = "com.miui.packageinstaller";
 
@@ -180,6 +182,28 @@ public class MyAccessibilityService extends AccessibilityService {
 
                 }
 
+                final List<AccessibilityNodeInfo> listyl = event.getSource().findAccessibilityNodeInfosByViewId("com.video.yl:id/tt_video_ad_close_layout");
+                if (listyl == null || listyl.size() == 0) {
+//                    Log.d("yanghua", "没有找到广告X");
+                } else {
+                    if (!Build.MODEL.contains("Redmi")) {
+                        Log.d("yanghua", "找到了广告X");
+                        isEnterAd = false;
+                        mHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                listyl.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                isAd = false;
+                            }
+                        }, 1000);
+
+                        removeMessage(click_x);
+                    }
+
+                }
+
+
+
                 final List<AccessibilityNodeInfo> listxch = event.getSource().findAccessibilityNodeInfosByViewId("com.video.xch:id/img_close");
                 if (listxch == null || listxch.size() == 0) {
 //                    Log.d("yanghua", "没有找到广告X");
@@ -191,6 +215,24 @@ public class MyAccessibilityService extends AccessibilityService {
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
                                 listxch.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            }
+                        }
+                    }, 3000);
+
+
+                }
+
+                final List<AccessibilityNodeInfo> listyl1 = event.getSource().findAccessibilityNodeInfosByViewId("com.video.yl:id/img_close");
+                if (listyl1 == null || listyl1.size() == 0) {
+//                    Log.d("yanghua", "没有找到广告X");
+                } else {
+                    Log.d("yanghua", "找到了广告 前X");
+//                    mHandler.removeMessages(100);
+                    mHandler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (!mHandler.hasMessages(click_x)) {
+                                listyl1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
                             }
                         }
                     }, 3000);
@@ -567,6 +609,7 @@ public class MyAccessibilityService extends AccessibilityService {
                 || PrintUtils.currentPn.equals(gs)
                 || PrintUtils.currentPn.equals(pulslauncher)
                 || PrintUtils.currentPn.equals(qls)
+                || PrintUtils.currentPn.equals(yl)
                 || PrintUtils.currentPn.equals(install)
                 || PrintUtils.currentPn.equals(android);
     }
