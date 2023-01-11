@@ -3,6 +3,8 @@ package solid.ren.accessibilityservicedemo;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
+import solid.ren.accessibilityservicedemo.service.FloatingButtonService;
+
 /**
  * Created by _SOLID
  * Date:2016/7/21
@@ -29,6 +31,10 @@ public class PrintUtils {
             case AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED://窗体状态改变
                 log("event type:TYPE_WINDOW_STATE_CHANGED");
                 log("yanghua === "+ "packageName:" + event.getPackageName() + "");
+                if (FloatingButtonService.isStarted) {
+                    FloatingButtonService.getInstance().update(event.getPackageName().toString());
+                }
+
                 try{
                     currentPn = event.getPackageName().toString();
                 }catch (Exception e){

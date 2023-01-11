@@ -39,12 +39,29 @@
             android:text="确定" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_open_window"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/ll"
+        android:text="开启弹窗"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_close_window"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_toRightOf="@+id/btn_open_window"
+        android:layout_below="@+id/ll"
+        android:text="关闭弹窗"
+        android:layout_height="wrap_content" />
+
+
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ll"
+        android:layout_below="@+id/btn_open_window"
         android:text="TextView"
         android:textSize="20sp" />
 

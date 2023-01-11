@@ -15,6 +15,7 @@ import android.view.accessibility.AccessibilityNodeInfo;
 
 import java.util.List;
 
+import solid.ren.accessibilityservicedemo.DisplayUtil;
 import solid.ren.accessibilityservicedemo.MainActivity;
 import solid.ren.accessibilityservicedemo.PrintUtils;
 
@@ -46,6 +47,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
     private final String fengdu = "com.cootek.crazyreader";
     //快手极速版
     private final String kuaishou = "com.kuaishou.nebula";
+    private final String kuaishou1= "com.smile.gifmaker";
     //抖音短视频
     private final String douying = "com.ss.android.ugc.aweme";
     //微视
@@ -95,6 +97,10 @@ private final String inputhuawei =  "com.baidu.input_huawei";
 
     //1加的问题
     private final String pulslauncher = "net.oneplus.launcher";
+    //小米不滑动问题
+    private final String xiao_securitycenter=  "com.miui.securitycenter";
+
+    private final String dewu = "com.shizhuang.duapp";
 
 
     private int recentCount = 0;
@@ -107,6 +113,8 @@ private final String inputhuawei =  "com.baidu.input_huawei";
 
     private final int img_close_flag = 23;
     private final int scroll_flag = 11;
+    //监管消息
+    private final int jianguanyuan = 1000;
     private final int click_x = 100;
     private final int click_gb = 101;
     private final int click_x_wzld = 102;
@@ -132,14 +140,14 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                     Log.d("yanghua", txt.toString());
                     if (txt.toString().contains("看视频辛苦")) {
                         Log.d("yanghua", "找到 看视频辛苦");
-//                    listxk.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+//                    listxk.get(0).performClick(AccessibilityNodeInfo.ACTION_CLICK);
                         removeMessage(click_x);
                         mHandler.sendEmptyMessageDelayed(click_x, 7_000);
                     }
 
                     if (txt.toString().contains("关闭广告")) {
                         Log.d("yanghua", "找到 关闭广告");
-//                    listxk.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+//                    listxk.get(0).performClick(AccessibilityNodeInfo.ACTION_CLICK);
                         removeMessage(click_x);
                         mHandler.sendEmptyMessageDelayed(click_gb, 1_000);
                     }
@@ -177,16 +185,16 @@ private final String inputhuawei =  "com.baidu.input_huawei";
 //                    Log.d("yanghua", "没有找到广告 关闭广告");
                 } else {
                         Log.d("yanghua", "找到了禁止");
-                    listjz.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    performClick(listjz.get(0));
                 }
 
-                final List<AccessibilityNodeInfo> listqx = event.getSource().findAccessibilityNodeInfosByText("取消");
-                if (listqx == null || listqx.size() == 0) {
-//                    Log.d("yanghua", "没有找到广告 关闭广告");
-                } else {
-                    Log.d("yanghua", "找到了取消");
-                    listqx.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
-                }
+//                final List<AccessibilityNodeInfo> listqx = event.getSource().findAccessibilityNodeInfosByText("取消");
+//                if (listqx == null || listqx.size() == 0) {
+////                    Log.d("yanghua", "没有找到广告 关闭广告");
+//                } else {
+//                    Log.d("yanghua", "找到了取消");
+//                    listqx.get(0).performClick(AccessibilityNodeInfo.ACTION_CLICK);
+//                }
 
 
                 //趣铃声的
@@ -199,7 +207,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                listqls.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listqls.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -216,12 +224,27 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                     mHandler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            listcd.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                            performClick(listcd.get(0));
                             isAd = false;
                         }
                     }, 1000);
 
                 }
+
+//                final List<AccessibilityNodeInfo> listksX = event.getSource().findAccessibilityNodeInfosByViewId("com.kuaishou.nebula:id/photo_detail_panel_close");
+//                if (listksX == null || listksX.size() == 0) {
+////                    Log.d("yanghua", "没有找到广告X");
+//                } else {
+//                    Log.d("yanghua", "找到了快手X");
+////                    isEnterAd = false;
+////                    mHandler.postDelayed(new Runnable() {
+////                        @Override
+////                        public void run() {
+//                            listksX.get(0).performClick(AccessibilityNodeInfo.ACTION_CLICK);
+////                        }
+////                    }, 1000);
+//
+//                }
 
 
                 final List<AccessibilityNodeInfo> list1 = event.getSource().findAccessibilityNodeInfosByViewId("com.video.xch:id/tt_video_ad_close_layout");
@@ -234,7 +257,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                list1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(list1.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -254,7 +277,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                listyl.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listyl.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -274,7 +297,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                listqc.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listqc.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -295,7 +318,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                listbsj.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listbsj.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -317,7 +340,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         @Override
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
-                                listxch.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listxch.get(0));
                             }
                         }
                     }, 3000);
@@ -335,7 +358,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         @Override
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
-                                listyl1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listyl1.get(0));
                             }
                         }
                     }, 3000);
@@ -353,7 +376,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         @Override
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
-                                listqc1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                               performClick(listqc1.get(0));
                             }
                         }
                     }, 3000);
@@ -371,7 +394,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         @Override
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
-                                listbsj1.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listbsj1.get(0));
                             }
                         }
                     }, 3000);
@@ -390,7 +413,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                listyy.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listyy.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -407,7 +430,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         @Override
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
-                                listyyimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listyyimg.get(0));
                             }
                         }
                     }, 3000);
@@ -423,7 +446,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                listkd.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listkd.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -440,7 +463,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         @Override
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
-                                listkdimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listkdimg.get(0));
                             }
                         }
                     }, 3000);
@@ -456,7 +479,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                listgs.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                                performClick(listgs.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -473,11 +496,13 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         @Override
                         public void run() {
                             if (!mHandler.hasMessages(click_x)) {
-                                listgsimg.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                               performClick(listgsimg.get(0));
                             }
                         }
                     }, 3000);
                 }
+
+
 
                 final List<AccessibilityNodeInfo> list2 = event.getSource().findAccessibilityNodeInfosByText("关闭广告");
                 if (list2 == null || list2.size() == 0) {
@@ -489,7 +514,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                         mHandler.postDelayed(new Runnable() {
                             @Override
                             public void run() {
-                                list2.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                               performClick(list2.get(0));
                                 isAd = false;
                             }
                         }, 1000);
@@ -523,7 +548,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
             mHandler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    listqls.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    performClick(listqls.get(0));
                     isAd = false;
                 }
             }, 1000);
@@ -551,7 +576,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                 @Override
                 public void run() {
                     isAd = true;
-                    list.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    performClick(list.get(0));
                 }
             }, 2000);
 
@@ -585,7 +610,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                 @Override
                 public void run() {
                     isAd = true;
-                    list.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    performClick(list.get(0));
                 }
             }, 2000);
 
@@ -620,7 +645,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                 @Override
                 public void run() {
                     isAd = true;
-                    list.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    performClick(list.get(0));
                 }
             }, 3000);
 
@@ -650,7 +675,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                 @Override
                 public void run() {
                     isAd = true;
-                    list22.get(0).performAction(AccessibilityNodeInfo.ACTION_CLICK);
+                    performClick(list22.get(0));
                 }
             }, 3000);
 
@@ -672,8 +697,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void cc() {
+    public void cc() {
 
         //AccessibilityService.GLOBAL_ACTION_BACK
         //GLOBAL_ACTION_HOME
@@ -681,7 +705,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
         //GLOBAL_ACTION_RECENTS
         if (!mHandler.hasMessages(scroll_flag)) {
 
-            Log.d("yanghua", "多少秒滑动一次 = " + MainActivity.time);
+            Log.d("yanghua", "cc 多少秒滑动一次 = " + MainActivity.time);
             mHandler.sendEmptyMessageDelayed(scroll_flag, MainActivity.time * 1000);
             isInMESSAGE = true;
         }
@@ -728,10 +752,16 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                     }
                 }else if(msg.what == click_x_wzld){
                     doClickWZLD();
+                }else if(msg.what == jianguanyuan){
+                    cc();
+                    //监管员
+                    mHandler.sendEmptyMessageDelayed(jianguanyuan,5*60*1000);
                 }
 
             }
         };
+        //监管员
+        mHandler.sendEmptyMessageDelayed(jianguanyuan,5*60*1000);
 
 
 //        //可用代码配置当前Service的信息
@@ -868,6 +898,7 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                 || PrintUtils.currentPn.equals(midu)
                 || PrintUtils.currentPn.equals(fengdu)
                 || PrintUtils.currentPn.equals(kuaishou)
+                || PrintUtils.currentPn.equals(kuaishou1)
                 || PrintUtils.currentPn.equals(douying)
                 || PrintUtils.currentPn.equals(weishi)
                 || PrintUtils.currentPn.equals(xch)
@@ -896,10 +927,24 @@ private final String inputhuawei =  "com.baidu.input_huawei";
                 || PrintUtils.currentPn.equals(intelligent)
                 || PrintUtils.currentPn.equals(inputhuawei)
 
+                || PrintUtils.currentPn.equals(xiao_securitycenter)
+                || PrintUtils.currentPn.equals(dewu)
                 || PrintUtils.currentPn.equals(android);
+//        return  true;
+    }
+
+    private void performClick(AccessibilityNodeInfo target){
+        if(PrintUtils.currentPn.equals(kuaishou)){
+            return;
+        }
+        target.performAction(AccessibilityNodeInfo.ACTION_CLICK);
     }
 
     private void doScroll() {
+        if(!MainActivity.switchFlag){
+            Log.d("yanghua", "switch 开关 关闭了 ");
+            return;
+        }
         lastscrolltime = System.currentTimeMillis();
 
 
@@ -911,19 +956,27 @@ private final String inputhuawei =  "com.baidu.input_huawei";
         Path path = new Path();
         Log.d("yanghua", "path main radiogroup =  " + MainActivity.RadioGroupId);
         //竖着滑动 1000 600
+        if(DisplayUtil.screenWith == 0){
+            DisplayUtil.getScreenRelatedInformation(this);
+        }
+        int X = DisplayUtil.screenWith/2;
+        int Y = DisplayUtil.screenHeight/2;
         if (MainActivity.RadioGroupId == 0) {
-            Log.d("yanghua", "现在上滑动 = ");
-            path.moveTo(300, 900);
-            path.lineTo(300, 600);
+            Log.d("yanghua", "现在上滑动 y 初始= "+ Y);
+
+//            path.moveTo(X, Y+DisplayUtil.screenHeight/3);
+//            path.lineTo(X, DisplayUtil.screenHeight/5);
+
+            path.moveTo(X, 1700);//这个需要适配
+            path.lineTo(X, 300);
         } else {
             Log.d("yanghua", "现在左右滑动 = ");
             path.moveTo(800, 120);
             path.lineTo(200, 120);
         }
 
-//先横滑
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            final GestureDescription.StrokeDescription sd = new GestureDescription.StrokeDescription(path, 1, 20);
+            final GestureDescription.StrokeDescription sd = new GestureDescription.StrokeDescription(path, 200, 500);
             boolean isGestureDispath = dispatchGesture(new GestureDescription.Builder().addStroke(sd).build(), new GestureResultCallback() {
                 @Override
                 public void onCompleted(GestureDescription gestureDescription) {
@@ -940,31 +993,9 @@ private final String inputhuawei =  "com.baidu.input_huawei";
             Log.d("yanghua", "isGestureDispath = " + isGestureDispath);
         }
 
-//横着滑动
-//                Path path1 = new Path();
-//
-////先横滑
-//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//                    final GestureDescription.StrokeDescription sd1 = new GestureDescription.StrokeDescription(path1, 1, 1);
-//                    boolean isGestureDispath = dispatchGesture(new GestureDescription.Builder().addStroke(sd1).build(), new GestureResultCallback() {
-//                        @Override
-//                        public void onCompleted(GestureDescription gestureDescription) {
-//                            super.onCompleted(gestureDescription);
-//                            Log.d("yanghua", "滑动结束 = ");
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(GestureDescription gestureDescription) {
-//                            super.onCancelled(gestureDescription);
-//                            Log.d("yanghua", "滑动取消 = ");
-//                        }
-//                    }, new Handler());
-//                    Log.d("yanghua", "isGestureDispath = " + isGestureDispath);
-//                }
 
         mHandler.sendEmptyMessageDelayed(scroll_flag, MainActivity.time * 1000);
 
-//                isInMESSAGE =false;
     }
 
 
